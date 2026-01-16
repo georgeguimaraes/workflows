@@ -1,5 +1,5 @@
 name: Mark Release Tagged
-description: Update release PR label from 'autorelease: pending' to 'autorelease: tagged'
+description: "Update release PR label from autorelease: pending to autorelease: tagged"
 
 inputs:
   pr-number:
