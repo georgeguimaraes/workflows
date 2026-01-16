@@ -11,6 +11,10 @@ on:
         description: "Path to the release-please manifest file"
         type: string
         default: ".release-please-manifest.json"
+    secrets:
+      token:
+        description: "GitHub token to use (defaults to GITHUB_TOKEN)"
+        required: false
 
 permissions:
   contents: write
@@ -25,3 +29,4 @@ jobs:
           config-file: ${{ inputs.config-file }}
           manifest-file: ${{ inputs.manifest-file }}
           skip-github-release: true
+          token: ${{ secrets.token || github.token }}
