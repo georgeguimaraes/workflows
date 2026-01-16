@@ -53,6 +53,16 @@ Extracts version from a release PR title or workflow input.
 - run: echo "Version is ${{ steps.version.outputs.version }}"
 ```
 
+### mark-release-tagged
+
+Updates a release PR label from `autorelease: pending` to `autorelease: tagged`.
+
+```yaml
+- uses: georgeguimaraes/workflows/actions/mark-release-tagged@main
+  with:
+    pr-number: ${{ github.event.pull_request.number }}
+```
+
 ### hex-publish
 
 Publishes an Elixir package to Hex.pm.

@@ -1,0 +1,18 @@
+name: Mark Release Tagged
+description: Update release PR label from 'autorelease: pending' to 'autorelease: tagged'
+
+inputs:
+  pr-number:
+    description: "PR number to update"
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Mark release PR as tagged
+      shell: bash
+      env:
+        GH_TOKEN: ${{ github.token }}
+        PR_NUMBER: ${{ inputs.pr-number }}
+      run: |
+        gh pr edit "$PR_NUMBER" --remove-label "autorelease: pending" --add-label "autorelease: tagged"
