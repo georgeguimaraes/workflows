@@ -1,0 +1,32 @@
+name: Extract Version
+description: Extract version from release PR title or workflow input
+
+inputs:
+  version:
+    description: "Version override (from workflow_dispatch)"
+    required: false
+  pr-title:
+    description: "PR title to extract version from"
+    required: false
+
+outputs:
+  version:
+    description: "Extracted version (without v prefix)"
+    value: ${{ steps.extract.outputs.version }}
+
+runs:
+  using: composite
+  steps:
+    - name: Extract version
+      id: extract
+      shell: bash
+      env:
+        INPUT_VERSION: ${{ inputs.version }}
+        PR_TITLE: ${{ inputs.pr-title }}
+      run: |
+        if [ -n "$INPUT_VERSION" ]; then
+          VERSION="$INPUT_VERSION"
+        else
+          VERSION=$(echo "$PR_TITLE" | grep -oP 'release \K[0-9]+\.[0-9]+\.[0-9]+')
+        fi
+        echo "version=$VERSION" >> $GITHUB_OUTPUT

@@ -39,6 +39,20 @@ Creates a git tag and GitHub release with auto-generated notes. Language-agnosti
     version: "1.2.3" # required, without v prefix
 ```
 
+### extract-version
+
+Extracts version from a release PR title or workflow input.
+
+```yaml
+- uses: georgeguimaraes/workflows/actions/extract-version@main
+  id: version
+  with:
+    version: ${{ inputs.version }}           # optional, from workflow_dispatch
+    pr-title: ${{ github.event.pull_request.title }} # optional
+
+- run: echo "Version is ${{ steps.version.outputs.version }}"
+```
+
 ### hex-publish
 
 Publishes an Elixir package to Hex.pm.
@@ -66,13 +80,10 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Extract version
+      - uses: georgeguimaraes/workflows/actions/extract-version@main
         id: version
-        env:
-          PR_TITLE: ${{ github.event.pull_request.title }}
-        run: |
-          VERSION=$(echo "$PR_TITLE" | grep -oP 'release \K[0-9.]+')
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
+        with:
+          pr-title: ${{ github.event.pull_request.title }}
 
       - uses: georgeguimaraes/workflows/actions/elixir-setup@main
 
