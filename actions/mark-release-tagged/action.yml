@@ -3,13 +3,14 @@ description: Update release PR label from 'autorelease: pending' to 'autorelease
 
 inputs:
   pr-number:
-    description: "PR number to update"
-    required: true
+    description: "PR number to update (skip if empty)"
+    required: false
 
 runs:
   using: composite
   steps:
     - name: Mark release PR as tagged
+      if: inputs.pr-number != ''
       shell: bash
       env:
         GH_TOKEN: ${{ github.token }}
