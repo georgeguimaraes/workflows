@@ -1,0 +1,16 @@
+name: Hex Publish
+description: Publish Elixir package to Hex.pm
+
+inputs:
+  hex-api-key:
+    description: "Hex.pm API key"
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Publish to Hex.pm
+      shell: bash
+      env:
+        HEX_API_KEY: ${{ inputs.hex-api-key }}
+      run: mix hex.publish --yes
