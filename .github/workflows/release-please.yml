@@ -28,5 +28,4 @@ jobs:
         with:
           config-file: ${{ inputs.config-file }}
           manifest-file: ${{ inputs.manifest-file }}
-          skip-github-release: true
           token: ${{ secrets.token || github.token }}

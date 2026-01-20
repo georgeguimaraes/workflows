@@ -1,0 +1,30 @@
+name: On Release Published
+
+on:
+  workflow_call:
+    inputs:
+      tag:
+        description: "Release tag (e.g., v1.0.0)"
+        type: string
+        required: true
+    secrets:
+      hex-api-key:
+        description: "Hex.pm API key"
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  hex-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag }}
+
+      - uses: georgeguimaraes/workflows/actions/elixir-setup@main
+
+      - uses: georgeguimaraes/workflows/actions/hex-publish@main
+        with:
+          hex-api-key: ${{ secrets.hex-api-key }}
