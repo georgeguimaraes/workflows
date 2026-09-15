@@ -1,6 +1,9 @@
 version: 2
 updates:
   - package-ecosystem: "github-actions"
-    directory: "/"
+    directories:
+      - "/"
+      - "/actions/elixir-setup"
+      - "/actions/hex-publish"
     schedule:
       interval: daily
