@@ -33,11 +33,11 @@ jobs:
         with:
           ref: ${{ inputs.tag }}
 
-      - uses: georgeguimaraes/workflows/actions/elixir-setup@0de3d19eb38c8138379e9811e73c1723ff573254 # main
+      - uses: georgeguimaraes/workflows/actions/elixir-setup@9208861c12989fe1a96df2fe41a2e7dd4bd5fb59 # v1.0.0
         with:
           elixir-version: ${{ inputs.elixir-version }}
           otp-version: ${{ inputs.otp-version }}
 
-      - uses: georgeguimaraes/workflows/actions/hex-publish@0de3d19eb38c8138379e9811e73c1723ff573254 # main
+      - uses: georgeguimaraes/workflows/actions/hex-publish@9208861c12989fe1a96df2fe41a2e7dd4bd5fb59 # v1.0.0
         with:
           hex-api-key: ${{ secrets.hex-api-key }}
