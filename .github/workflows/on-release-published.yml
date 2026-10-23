@@ -38,6 +38,6 @@ jobs:
           elixir-version: ${{ inputs.elixir-version }}
           otp-version: ${{ inputs.otp-version }}
 
-      - uses: georgeguimaraes/workflows/actions/hex-publish@9208861c12989fe1a96df2fe41a2e7dd4bd5fb59 # v1.0.0
+      - uses: georgeguimaraes/workflows/actions/hex-publish@0895359397b7e82725d0dce6d5fc2af8068a6ea1 # v1.0.1
         with:
           hex-api-key: ${{ secrets.hex-api-key }}
